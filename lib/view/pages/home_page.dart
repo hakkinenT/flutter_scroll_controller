@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_scroll_controller/view/pages/music_list_page.dart';
 import 'package:flutter_scroll_controller/view/widgets/custom_elevate_button.dart';
 
 class HomePage extends StatelessWidget {
@@ -24,7 +25,14 @@ class HomePage extends StatelessWidget {
             ),
             CustomElevatedButton(
               label: "See Music List Page",
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => const MusicListPage(),
+                  ),
+                );
+              },
             ),
           ],
         ),
