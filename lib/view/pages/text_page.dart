@@ -1,19 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_scroll_controller/constants/constants.dart';
 
-import '../../constants/constants.dart';
 import '../widgets/move_down_button.dart';
 import '../widgets/move_up_button.dart';
 
-class MusicListPage extends StatefulWidget {
-  const MusicListPage({super.key});
+class TextPage extends StatefulWidget {
+  const TextPage({super.key});
 
   @override
-  State<MusicListPage> createState() => _MusicListPageState();
+  State<TextPage> createState() => _TextPageState();
 }
 
-class _MusicListPageState extends State<MusicListPage> {
+class _TextPageState extends State<TextPage> {
   late final ScrollController _scrollController;
   bool up = false;
+  final textSize = 150.0;
 
   @override
   void initState() {
@@ -43,36 +44,32 @@ class _MusicListPageState extends State<MusicListPage> {
   }
 
   _moveUp() {
-    _move(0.0);
+    _move(_scrollController.offset - textSize);
   }
 
   _moveDown() {
-    final maxScrollExtent = _scrollController.position.maxScrollExtent;
-    _move(maxScrollExtent);
+    _move(_scrollController.offset + textSize);
   }
 
-  _move(double value) {
-    _scrollController.jumpTo(value);
+  _move(double offset) {
+    if (_scrollController.hasClients) {
+      _scrollController.animateTo(offset,
+          duration: const Duration(milliseconds: 500), curve: Curves.linear);
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('My Musics'),
+        title: const Text('Read Text'),
       ),
-      body: ListView.builder(
+      body: ListView(
         controller: _scrollController,
-        padding: const EdgeInsets.all(20),
-        itemCount: musics.length,
-        itemBuilder: (context, index) {
-          return Card(
-            child: ListTile(
-              leading: const Icon(Icons.music_note),
-              title: Text(musics[index]),
-            ),
-          );
-        },
+        padding: const EdgeInsets.all(20.0),
+        children: [
+          Text(text),
+        ],
       ),
       floatingActionButton: up
           ? MoveUpButton(

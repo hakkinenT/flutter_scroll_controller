@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_scroll_controller/view/pages/music_list_page.dart';
+import 'package:flutter_scroll_controller/view/pages/text_page.dart';
 import 'package:flutter_scroll_controller/view/widgets/custom_elevate_button.dart';
 
 class HomePage extends StatelessWidget {
@@ -18,7 +19,14 @@ class HomePage extends StatelessWidget {
           children: [
             CustomElevatedButton(
               label: "See Text Page",
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => const TextPage(),
+                  ),
+                );
+              },
             ),
             const SizedBox(
               height: 20,
