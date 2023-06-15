@@ -4,6 +4,9 @@ import 'package:flutter_scroll_controller/constants/constants.dart';
 import '../widgets/move_down_button.dart';
 import '../widgets/move_up_button.dart';
 
+final PageStorageBucket _pageBucket = PageStorageBucket();
+PageStorageKey _myKey = const PageStorageKey("textPage");
+
 class TextPage extends StatefulWidget {
   const TextPage({super.key});
 
@@ -13,14 +16,22 @@ class TextPage extends StatefulWidget {
 
 class _TextPageState extends State<TextPage> {
   late final ScrollController _scrollController;
-  bool up = false;
-  final textSize = 150.0;
+  bool _up = false;
+  final double _textSize = 150.0;
+  bool _isTapped = false;
 
   @override
   void initState() {
     super.initState();
     _scrollController = ScrollController();
+
     _scrollController.addListener(_scrollListener);
+  }
+
+  @override
+  void dispose() {
+    _scrollController.removeListener(_scrollListener);
+    super.dispose();
   }
 
   _scrollListener() {
@@ -34,21 +45,22 @@ class _TextPageState extends State<TextPage> {
 
     if (isPageInit) {
       setState(() {
-        up = false;
+        _up = false;
       });
     } else if (isPageEnd) {
       setState(() {
-        up = true;
+        _up = true;
       });
     }
+    _pageBucket.writeState(context, _up, identifier: ValueKey(_myKey));
   }
 
   _moveUp() {
-    _move(_scrollController.offset - textSize);
+    _move(_scrollController.offset - _textSize);
   }
 
   _moveDown() {
-    _move(_scrollController.offset + textSize);
+    _move(_scrollController.offset + _textSize);
   }
 
   _move(double offset) {
@@ -64,20 +76,45 @@ class _TextPageState extends State<TextPage> {
       appBar: AppBar(
         title: const Text('Read Text'),
       ),
-      body: ListView(
-        controller: _scrollController,
-        padding: const EdgeInsets.all(20.0),
-        children: [
-          Text(text),
-        ],
+      body: PageStorage(
+        key: ValueKey(_myKey),
+        bucket: _pageBucket,
+        child: GestureDetector(
+          onTap: _onTap,
+          child: ListView(
+            key: const PageStorageKey("list_textPage"),
+            controller: _scrollController,
+            padding: const EdgeInsets.all(20.0),
+            children: [
+              Text(text),
+            ],
+          ),
+        ),
       ),
-      floatingActionButton: up
-          ? MoveUpButton(
-              onPressed: () => _moveUp(),
-            )
-          : MoveDownButton(
-              onPressed: () => _moveDown(),
-            ),
+      floatingActionButton: _isTapped
+          ? _up
+              ? MoveUpButton(
+                  onPressed: _moveUp,
+                )
+              : MoveDownButton(
+                  onPressed: _moveDown,
+                )
+          : null,
     );
+  }
+
+  _onTap() {
+    setState(() {
+      _isTapped = !_isTapped;
+    });
+
+    final bool? move =
+        _pageBucket.readState(context, identifier: ValueKey(_myKey));
+
+    if (move != null) {
+      setState(() {
+        _up = move;
+      });
+    }
   }
 }
