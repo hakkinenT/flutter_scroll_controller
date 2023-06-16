@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_scroll_controller/view/pages/music_details_page.dart';
 
 import '../../constants/constants.dart';
 import '../widgets/move_down_button.dart';
@@ -20,6 +21,12 @@ class _MusicListPageState extends State<MusicListPage> {
     super.initState();
     _scrollController = ScrollController();
     _scrollController.addListener(_scrollListener);
+  }
+
+  @override
+  void dispose() {
+    _scrollController.removeListener(_scrollListener);
+    super.dispose();
   }
 
   _scrollListener() {
@@ -66,10 +73,20 @@ class _MusicListPageState extends State<MusicListPage> {
         padding: const EdgeInsets.all(20),
         itemCount: musics.length,
         itemBuilder: (context, index) {
-          return Card(
-            child: ListTile(
-              leading: const Icon(Icons.music_note),
-              title: Text(musics[index]),
+          return InkWell(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => MusicDetailsPage(name: musics[index]),
+                ),
+              );
+            },
+            child: Card(
+              child: ListTile(
+                leading: const Icon(Icons.music_note),
+                title: Text(musics[index]),
+              ),
             ),
           );
         },

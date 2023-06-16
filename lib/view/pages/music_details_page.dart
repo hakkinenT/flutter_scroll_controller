@@ -10,8 +10,15 @@ class MusicDetailsPage extends StatelessWidget {
       appBar: AppBar(
         title: const Text("Music Details"),
       ),
-      body: Center(
-        child: Text(name),
+      body: Padding(
+        padding: const EdgeInsets.all(30.0),
+        child: Center(
+          child: Text(
+            name,
+            textAlign: TextAlign.center,
+            style: const TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
+          ),
+        ),
       ),
     );
   }
