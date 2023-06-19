@@ -1,16 +1,46 @@
-# flutter_scroll_controller
+# Scroll Controller 
+[![NPM](https://img.shields.io/npm/l/react)](https://github.com/hakkinenT/flutter_scroll_controller/blob/master/LICENSE) 
 
-A new Flutter project.
+# Sobre o projeto
 
-## Getting Started
+Scroll Controller é um pequeno projeto, cujo objetivo é explorar um pouco das classes Scroll Controller e Page Storage do Flutter.
 
-This project is a starting point for a Flutter application.
+## Layout mobile
 
-A few resources to get you started if this is your first Flutter project:
+![Mobile 1](https://github.com/hakkinenT/assets/blob/master/flutter-projects/flutter-scroll-controller/homepage1.png) ![Mobile 2](https://github.com/hakkinenT/assets/blob/master/flutter-projects/flutter-scroll-controller/musiclistpage1.png) ![Mobile 3](https://github.com/hakkinenT/assets/blob/master/flutter-projects/flutter-scroll-controller/textpage1.png)
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## Videos
+![Gif 1](https://github.com/hakkinenT/assets/blob/master/flutter-projects/flutter-scroll-controller/gif/music-list-1.gif) ![Gif 2](https://github.com/hakkinenT/assets/blob/master/flutter-projects/flutter-scroll-controller/gif/music-list-2.gif)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+![Gif 3](https://github.com/hakkinenT/assets/blob/master/flutter-projects/flutter-scroll-controller/gif/text-page-1.gif) ![Gif 4](https://github.com/hakkinenT/assets/blob/master/flutter-projects/flutter-scroll-controller/gif/text-page-2.gif) ![Gif 5](https://github.com/hakkinenT/assets/blob/master/flutter-projects/flutter-scroll-controller/gif/text-page-3.gif)
+
+## Principais funcionalidades
+- Controlar o scroll de uma página por meio de um botão
+- Preservar a posição do scroll em uma transição entre páginas
+
+
+# Tecnologias utilizadas
+- Flutter
+
+
+# Como executar o projeto
+
+```bash
+# clonar repositório
+git clone https://github.com/hakkinenT/flutter_scroll_controller.git
+
+# entrar na pasta do projeto 
+cd flutter_scroll_controller
+
+# instalar dependências
+flutter pub get
+
+# executar o projeto
+flutter run
+```
+
+# Autor
+
+Tawanna Hakkinen Oliveira Leite
+
+https://www.linkedin.com/in/tawannahakkinen/
