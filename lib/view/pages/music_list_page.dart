@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_scroll_controller/utils/show_snacbar.dart';
 import 'package:flutter_scroll_controller/view/pages/music_details_page.dart';
 
 import '../../constants/constants.dart';
@@ -42,10 +43,12 @@ class _MusicListPageState extends State<MusicListPage> {
       setState(() {
         up = false;
       });
+      showSnackbar(context, "Início da Lista");
     } else if (isPageEnd) {
       setState(() {
         up = true;
       });
+      showSnackbar(context, "Fim da Lista");
     }
   }
 

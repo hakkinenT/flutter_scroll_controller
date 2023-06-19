@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_scroll_controller/constants/constants.dart';
+import 'package:flutter_scroll_controller/utils/show_snacbar.dart';
 
 import '../widgets/move_down_button.dart';
 import '../widgets/move_up_button.dart';
@@ -47,10 +48,12 @@ class _TextPageState extends State<TextPage> {
       setState(() {
         _up = false;
       });
+      showSnackbar(context, "Início do Texto");
     } else if (isPageEnd) {
       setState(() {
         _up = true;
       });
+      showSnackbar(context, "Fim do Texto");
     }
     _pageBucket.writeState(context, _up, identifier: ValueKey(_myKey));
   }
